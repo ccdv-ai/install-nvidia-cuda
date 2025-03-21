@@ -22,4 +22,10 @@ yes
 
 export PATH=/opt/anaconda3/bin:$PATH
 conda create --name transformers python=3.12 numpy scipy matplotlib scikit-learn
+
+/etc/skel/.bashrc
+export CUDA_VISIBLE_DEVICES=0,1
+export PATH="/usr/local/cuda-12.1/bin/:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-12.1/lib64/:$LD_LIBRARY_PATH"
+export PATH=/opt/anaconda3/bin:$PATH
 ```

@@ -23,9 +23,29 @@ yes
 export PATH=/opt/anaconda3/bin:$PATH
 conda create --name transformers python=3.12 numpy scipy matplotlib scikit-learn
 
-/etc/skel/.bashrc
+sudo nano /etc/skel/.bashrc
 export CUDA_VISIBLE_DEVICES=0,1
 export PATH="/usr/local/cuda-12.1/bin/:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-12.1/lib64/:$LD_LIBRARY_PATH"
 export PATH=/opt/anaconda3/bin:$PATH
+
+
+sudo bash -c 'for user_dir in /home/*; do
+    if [ -d "$user_dir" ]; then
+        user_name=$(basename "$user_dir")
+        
+        # 1. Sauvegarde (si le fichier existe)
+        if [ -f "$user_dir/.bashrc" ]; then
+            cp "$user_dir/.bashrc" "$user_dir/.bashrc.bak"
+        fi
+        
+        # 2. Copie du nouveau fichier
+        cp /etc/skel/.bashrc "$user_dir/.bashrc"
+        
+        # 3. Réattribution des droits à l utilisateur
+        chown "$user_name:$user_name" "$user_dir/.bashrc"
+        
+        echo "Succès pour $user_name"
+    fi
+done'
 ```

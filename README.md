@@ -4,6 +4,8 @@
 ```bash
 sudo apt-get remove --purge '^nvidia-.*'
 sudo apt-get install ubuntu-desktop
+sudo apt install linux-headers-$(uname -r) build-essential dkms
+# https://www.reddit.com/r/comfyui/comments/1li8cly/troubleshooting_nvidia_driver_installation_for_a/
 
 sudo apt update
 sudo apt upgrade

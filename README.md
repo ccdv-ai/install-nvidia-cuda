@@ -61,3 +61,30 @@ sudo bash -c 'for user_dir in /home/*; do
     fi
 done'
 ```
+
+## Tunnel
+```
+sudo apt install autossh  # (ou yum install autossh)
+autossh -f -N -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
+```
+ou
+```
+nano /etc/systemd/system/litellm-tunnel.service
+```
+[Unit]
+Description=Tunnel SSH pour LiteLLM
+After=network.target
+
+[Service]
+User=ton_utilisateur
+ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+sudo systemctl daemon-reload
+sudo systemctl enable litellm-tunnel
+sudo systemctl start litellm-tunnel
+```

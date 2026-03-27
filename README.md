@@ -99,9 +99,7 @@ WantedBy=multi-user.target
 ```
 ```
 sudo systemctl daemon-reload
-```
-```
-sudo systemctl daemon-reload
 sudo systemctl enable litellm-tunnel
 sudo systemctl start litellm-tunnel
+sudo systemctl status litellm-tunnel
 ```

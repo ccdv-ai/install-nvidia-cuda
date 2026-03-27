@@ -64,27 +64,39 @@ done'
 
 ## Tunnel
 ```
-ssh -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
-sudo apt install autossh  # (ou yum install autossh)
-autossh -f -N -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
+ssh-keygen -t rsa
+ssh-copy-id utilisateur@IP_DU_SERVEUR_A
+```
+```
+ssh -f -N -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
 ```
 ou
 ```
-nano /etc/systemd/system/litellm-tunnel.service
+sudo nano /etc/systemd/system/litellm-tunnel.service
 ```
 ```
 [Unit]
-Description=Tunnel SSH pour LiteLLM
-After=network.target
+Description=Tunnel SSH permanent pour LiteLLM (Port 4000)
+After=network-online.target
 
 [Service]
-User=ton_utilisateur
+# Remplace 'ton_nom_utilisateur' par ton vrai nom d'utilisateur sur le Serveur B
+User=ton_nom_utilisateur
+
+# La commande SSH : 
+# -o ExitOnForwardFailure=yes : Arrête proprement si le port est déjà pris
+# -o ServerAliveInterval=60 : Envoie un signal toutes les minutes pour garder la connexion en vie
 ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
+
+# Relancer automatiquement le tunnel s'il tombe (après 5 secondes)
 Restart=always
-RestartSec=10
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
+```
+```
+sudo systemctl daemon-reload
 ```
 ```
 sudo systemctl daemon-reload

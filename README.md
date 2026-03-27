@@ -63,14 +63,16 @@ done'
 ```
 
 ## Tunnel
+Clé ssh
 ```
 ssh-keygen -t rsa
 ssh-copy-id utilisateur@IP_DU_SERVEUR_A
 ```
+Lancement de base
 ```
 ssh -f -N -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
 ```
-ou
+Lancement auto
 ```
 sudo nano /etc/systemd/system/litellm-tunnel.service
 ```

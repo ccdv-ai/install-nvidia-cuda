@@ -71,6 +71,7 @@ ou
 ```
 nano /etc/systemd/system/litellm-tunnel.service
 ```
+```
 [Unit]
 Description=Tunnel SSH pour LiteLLM
 After=network.target
@@ -83,6 +84,7 @@ RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
+```
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable litellm-tunnel

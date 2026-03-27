@@ -64,6 +64,7 @@ done'
 
 ## Tunnel
 ```
+ssh -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
 sudo apt install autossh  # (ou yum install autossh)
 autossh -f -N -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L 4000:localhost:4000 utilisateur@IP_DU_SERVEUR_A
 ```

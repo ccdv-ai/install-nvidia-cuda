@@ -53,6 +53,8 @@ sudo apt upgrade
 
 ### Step 4: Install NVIDIA Drivers
 
+**Option A: Automatic Installation (Recommended)**
+
 ```bash
 # Install the Ubuntu drivers common package
 sudo apt install ubuntu-drivers-common
@@ -60,11 +62,42 @@ sudo apt install ubuntu-drivers-common
 # List available drivers for your device
 sudo ubuntu-drivers devices
 
-# Install the recommended driver (e.g., version 580 for cuda >= 13.0)
+# Install the recommended driver (e.g., version 580 for CUDA >= 13.0)
 sudo apt install nvidia-driver-580
 ```
 
-> **Tip**: Verify installation with `nvidia-smi` after reboot.
+**Option B: Manual Download from NVIDIA**
+
+Download drivers and CUDA toolkit manually from the official NVIDIA website:
+
+- **NVIDIA Drivers**: https://www.nvidia.com/Download/index.aspx
+- **CUDA Toolkit (all versions)**: https://developer.nvidia.com/cuda-toolkit-archive
+- **CUDA Toolkit (latest)**: https://developer.nvidia.com/cuda-downloads
+
+> **Example**: CUDA 13.0.0 for Ubuntu 24.04 x86_64 (runfile local):  
+> https://developer.nvidia.com/cuda-13-0-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=runfile_local
+
+> **Note**: When downloading CUDA manually, choose the **runfile (local)** installer for more control over the installation location.
+
+**Installation Commands:**
+
+```bash
+# Download the CUDA runfile installer
+wget https://developer.download.nvidia.com/compute/cuda/13.0.0/local_installers/cuda_13.0.0_580.65.06_linux.run
+
+# Run the installer
+sudo sh cuda_13.0.0_580.65.06_linux.run
+```
+
+> **Tip**: During the runfile installation, you can choose which components to install (Driver, CUDA Toolkit, samples, etc.). Uncheck the driver if you already installed it separately.
+
+```bash
+# Example: Install CUDA from runfile (make executable first)
+chmod +x cuda-linux-x86_64-x.x.x-local.run
+sudo ./cuda-linux-x86_64-x.x.x-local.run
+```
+
+> **Tip**: Verify installation with `nvidia-smi` after reboot. Check CUDA version with `nvcc --version`.
 
 ---
 

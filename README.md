@@ -90,12 +90,6 @@ sudo sh cuda_13.0.0_580.65.06_linux.run
 
 > **Tip**: During the runfile installation, you can choose which components to install (Driver, CUDA Toolkit, samples, etc.). Uncheck the driver if you already installed it separately.
 
-```bash
-# Example: Install CUDA from runfile (make executable first)
-chmod +x cuda-linux-x86_64-x.x.x-local.run
-sudo ./cuda-linux-x86_64-x.x.x-local.run
-```
-
 > **Tip**: Verify installation with `nvidia-smi` after reboot. Check CUDA version with `nvcc --version`.
 
 ---

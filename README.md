@@ -70,7 +70,6 @@ sudo apt install nvidia-driver-580
 
 Download drivers and CUDA toolkit manually from the official NVIDIA website:
 
-- **NVIDIA Drivers**: https://www.nvidia.com/Download/index.aspx
 - **CUDA Toolkit (all versions)**: https://developer.nvidia.com/cuda-toolkit-archive
 - **CUDA Toolkit (latest)**: https://developer.nvidia.com/cuda-downloads
 
